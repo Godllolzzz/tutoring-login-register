@@ -10,7 +10,6 @@ import twitterLogo from "../assets/twitter.png";
 import { Link } from "react-router-dom";
 
 const Register = () => {
-  // State for each input field
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -118,7 +117,7 @@ const Register = () => {
                 placeholder="Confirm Password"
                 className={`placeholder-gray-400 text-sm cursor-text`}
                 value={confirmPassword}
-                onChange={handleConfirmPasswordChange} // Handle Confirm Password change
+                onChange={handleConfirmPasswordChange} 
               />
             </div>
             {!isConfirmPasswordValid && (
@@ -132,7 +131,7 @@ const Register = () => {
             <div className="flex justify-center mt-2">
               <div
                 className="bg-[#094971] w-40 text-xs text-white text-center py-2 rounded-3xl cursor-pointer hover:bg-[#0b5c8f] shadow-md shadow-[#094971] active:bg-[#094971]"
-                onClick={registerHandler} // Handle Register click
+                onClick={registerHandler} 
               >
                 Register
               </div>
