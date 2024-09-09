@@ -37,6 +37,7 @@ const Register = () => {
     const value = e.target.value;
     setPassword(value);
     setIsPasswordValid(value.trim().length > 0);
+    console.log(isPasswordValid);
   };
 
   const handleConfirmPasswordChange = (e) => {
@@ -45,7 +46,6 @@ const Register = () => {
     setIsConfirmPasswordValid(value === password);
   };
 
-  // Handler for Register button
   const registerHandler = () => {
     if (
       isFullNameValid &&
