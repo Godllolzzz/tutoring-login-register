@@ -6,12 +6,14 @@ import facebookLogo from "../assets/facebook.png";
 import googleLogo from "../assets/google.png";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import Loading from "./Loading";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isEmailOk, setIsEmailOk] = useState(true);
   const [isPasswordOk, setIsPasswordOk] = useState(true);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleEmailChange = (e) => {
@@ -39,11 +41,16 @@ const Login = () => {
       setIsPasswordOk(false);
       return;
     }
-    if (isEmailOk && isPasswordOk) navigate("home");
+    setLoading(true);
+    setTimeout(() => {
+      if (isEmailOk && isPasswordOk) navigate("home");
+      setLoading(false);
+    }, 1500);
   };
 
   return (
     <div className="h-[100vh] flex items-center justify-center bg-[#EDECF2]">
+      {loading && <Loading />}
       <div className="absolute w-[100vw] bg-gradient-to-r from-[#e4f3fc] to-[#084699] h-[100vh]"></div>
       <div className="bg-[#ffffff] w-[55rem] h-[30rem] z-10 flex flex-row rounded-lg p-4">
         <div className="flex flex-[4] flex-col items-center">
