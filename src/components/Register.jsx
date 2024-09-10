@@ -8,12 +8,15 @@ import facebookLogo from "../assets/facebook.png";
 import googleLogo from "../assets/google.png";
 import twitterLogo from "../assets/twitter.png";
 import { Link } from "react-router-dom";
+import Loading from "./Loading";
 
 const Register = () => {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [isRegistered, setIsRegistered] = useState(false);
 
   const [isFullNameValid, setIsFullNameValid] = useState(true);
   const [isEmailValid, setIsEmailValid] = useState(true);
@@ -56,6 +59,15 @@ const Register = () => {
       console.log("Email:", email);
       console.log("Password:", password);
       console.log("Confirm Password:", confirmPassword);
+      setLoading(true);
+      setTimeout(() => {
+        setLoading(false);
+        setIsRegistered(true);
+        setEmail("");
+        setFullName("");
+        setPassword("");
+        setConfirmPassword("");
+      }, 1500);
     } else {
       console.log("Validation failed. Please check your inputs.");
     }
@@ -63,6 +75,8 @@ const Register = () => {
 
   return (
     <div className="h-[100vh] flex items-center justify-center bg-[#EDECF2]">
+      {loading && <Loading />}
+
       <div className="absolute w-[100vw] bg-gradient-to-r from-[#e4f3fc] to-[#084699] h-[100vh]"></div>
       <div className="bg-[#ffffff] w-[55rem] h-[30rem] z-10 flex flex-row rounded-lg p-4">
         <div className="flex flex-[4] flex-col items-center">
@@ -117,7 +131,7 @@ const Register = () => {
                 placeholder="Confirm Password"
                 className={`placeholder-gray-400 text-sm cursor-text`}
                 value={confirmPassword}
-                onChange={handleConfirmPasswordChange} 
+                onChange={handleConfirmPasswordChange}
               />
             </div>
             {!isConfirmPasswordValid && (
@@ -128,10 +142,15 @@ const Register = () => {
                 *Please enter the valid details.
               </p>
             )}
+            {isRegistered && (
+              <p className="text-green-500 text-xs">
+                *User Registration successfull
+              </p>
+            )}
             <div className="flex justify-center mt-2">
               <div
                 className="bg-[#094971] w-40 text-xs text-white text-center py-2 rounded-3xl cursor-pointer hover:bg-[#0b5c8f] shadow-md shadow-[#094971] active:bg-[#094971]"
-                onClick={registerHandler} 
+                onClick={registerHandler}
               >
                 Register
               </div>
